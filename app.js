@@ -3,7 +3,7 @@
 var juego = {
 	
 	"sala": [],
-	"posPlayer": []
+	"posPlayer": [] // [y, x]
 	
 };
 
@@ -74,9 +74,9 @@ function muestraSala (conConsola = false) {
 	} else {
 		
 		// Variables
-		let strHtml = ""; // gran string que se meterá al html
-		let strFila; // string temporal que contiene los símbolos de una fila
-		let strTecho = ""; // string que contiene el techo
+		let strHtml = ""; 		// gran string que se meterá al html
+		let strFila; 			// string temporal que contiene los símbolos de una fila
+		let strTecho = ""; 		// string que contiene el techo
 		let strSimbolo = "";
 		
 		
@@ -96,27 +96,28 @@ function muestraSala (conConsola = false) {
 		
 		for (let _x of juego.sala) { // _x --> fila
 			
-			posY = 0;
+			posX = 0;
 			strFila = "";
 			
 			for (let _x2 of _x) { // _x2 --> símbolo
 				
 				strSimbolo = "";
 				
-				/*
+				
 				console.log([posY, posX].toString());
 				console.log(juego.posPlayer.toString());
 				console.log("-----");
-				*/
 				
-				if ([posY, posX].toString() === juego.posPlayer.toString()) {
-					strSimbolo = "O";
-					console.log("ECASLKHDKAJSHD");
-					console.log([posY, posX]);
-					
-					
+				
+				if ([posY, posX].toString() == juego.posPlayer.toString()) {
+					strSimbolo = "O ";
 				} else {
 					strSimbolo = diccionario(_x2);
+				};
+				
+				
+				if ([posY, posX].toString() == "[0,0]") {
+					strSimbolo = "X";
 				};
 				
 				
@@ -155,8 +156,8 @@ function diccionario (symbol) {
 	
 	
 	let info = {
-		0: " ",		// vacío
-		2: "X"
+		0: ". ",		// vacío
+		2: "X "
 	};
 	
 	// TO-DO ERRORES
@@ -175,34 +176,28 @@ function muevePlayer (dir) {
 		muevePlayer("der")
 	*/
 	
-	let cambio;
+	let cambio; // [y, x]
 	
 	
 	switch (dir) {
 		
 		case "arr": {
-			cambio = [0, 1];
+			cambio = [-1, 0];
 			break;
 		};
 
 		case "aba": {
-			cambio = [0, -1];
+			cambio = [1, 0];
 			break;
 		};
 
 		case "izq": {
-			cambio = [-1, 0];
+			cambio = [0, -1];
 			break;
 		};
 		
 		case "der": {
-			cambio = [1, 0];
-			
-			console.log("ANTES: " + juego.posPlayer);
-			juego.posPlayer[0] = 3;
-			juego.posPlayer[1] = 3;
-			console.log("DESP: " + juego.posPlayer);
-			
+			cambio = [0, 1];
 			break;
 		};
 		
@@ -211,13 +206,13 @@ function muevePlayer (dir) {
 		
 	};
 	
-	/*
-	let posPlayer = juego.posPlayer; // [x, y]
-	posPlayer[0] = posPlayer[0] + cambio[1];
-	posPlayer[1] = posPlayer[1] + cambio[0];
+	
+	let posPlayer = juego.posPlayer; // [y, y]
+	posPlayer[0] = posPlayer[0] + cambio[0];
+	posPlayer[1] = posPlayer[1] + cambio[1];
 	
 	juego.posPlayer = posPlayer;
-	*/
+	
 	
 	muestraSala();
 	
@@ -225,19 +220,33 @@ function muevePlayer (dir) {
 
 
 
+function pulsaTecla (e) {
+	
+	let key = e.key;
+	
+	if (["w", "ArrowUp"].includes(key)) {
+		muevePlayer("arr");
+	} else if (["s", "ArrowDown"].includes(key)) {
+		muevePlayer("aba");
+	}
+	
+	console.log(e);
+	
+};
+
+
+
+
 // ---------------------- Fin funciones ----------------------
 
+// EHs
+document.addEventListener("keydown", pulsaTecla)
 
 
 // Init
-generaSala(7, 5);
-juego.posPlayer = [0, 0];
+generaSala(4, 4);
+juego.posPlayer = [1, 1];
 muestraSala();
 
 
-muevePlayer("der");
-
-
-
-
-//console.log(arrSala);
+muevePlayer("aba");
