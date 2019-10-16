@@ -2,7 +2,10 @@
 // Variables globales
 var juego = {
 	
-	"sala": [],
+	"sala": [], // [[fila1], [fila2], [fila3]] --> [simbolo1, simbolo2...]
+	"maxY": 0,
+	"maxX": 0,
+	
 	"posPlayer": [] // [y, x]
 	
 };
