@@ -37,6 +37,8 @@ function generaSala (columnas, filas) {
 	
 	// Declaro la sala
 	let arrSala = [];
+	juego.maxX = columnas - 1;
+	juego.maxY = filas - 1;
 	
 	
 	// Defino un fila
@@ -107,11 +109,6 @@ function muestraSala (conConsola = false) {
 				strSimbolo = "";
 				
 				
-				console.log([posY, posX].toString());
-				console.log(juego.posPlayer.toString());
-				console.log("-----");
-				
-				
 				if ([posY, posX].toString() == juego.posPlayer.toString()) {
 					strSimbolo = "O ";
 				} else {
@@ -169,6 +166,13 @@ function diccionario (symbol) {
 };
 
 
+
+function getSimbolo (y, x) {
+	return juego.sala[y][x];
+};
+
+
+
 function muevePlayer (dir) {
 	/*
 		Modifica las coordenadas del jugador según lo indicado
@@ -211,8 +215,8 @@ function muevePlayer (dir) {
 	
 	
 	let posPlayer = juego.posPlayer; // [y, y]
-	posPlayer[0] = posPlayer[0] + cambio[0];
-	posPlayer[1] = posPlayer[1] + cambio[1];
+	posPlayer[0] = Math.max (Math.min (posPlayer[0] + cambio[0], juego.maxY), 0);
+	posPlayer[1] = Math.max (Math.min (posPlayer[1] + cambio[1], juego.maxX), 0);
 	
 	juego.posPlayer = posPlayer;
 	
@@ -262,8 +266,11 @@ document.addEventListener("keydown", pulsaTecla)
 
 // Init
 generaSala(4, 4);
-juego.posPlayer = [1, 1];
+juego.sala[1][0] = 2;
+
+console.log(juego.sala);
+
+
+juego.posPlayer = [0, 1];
 muestraSala();
 
-
-muevePlayer("aba");
