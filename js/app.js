@@ -3,12 +3,36 @@
 var juego = {
 	
 	"sala": [], // [[fila1], [fila2], [fila3]] --> [simbolo1, simbolo2...]
+	"idSala": 0,
 	"maxY": 0,
 	"maxX": 0,
 	
-	"posPlayer": [] // [y, x]
+	"posPlayer": [], // [y, x]
+	"vidaPlayer": [5],
+	
+	
+	sumaVidaPlayer: function (n) {
+		/*
+			Suma o resta vida al jugador.
+			
+			juego.sumaVidaPlayer(1) // cura 1 de vida
+			juego.sumaVidaPlayer(-1) // quita 1 de vida
+		*/
+		
+		
+		let vidaActual = this.vidaPlayer;
+		vidaActual = Math.max ( vidaActual, 0); // limito por debajo a 0
+		
+		this.vidaPlayer = vidaActual;
+		
+	}
 	
 };
+
+
+var tengoLlave = false;
+var cambiandoDeSala = false;
+
 
 
 /* Esquema array juego.sala
@@ -53,7 +77,7 @@ function generaSala (columnas, filas) {
 	
 	// Copio la fila en el array N veces
 	for (let i1 = 0; i1 < filas; i1++) {
-		arrSala.push (fila);
+		arrSala.push ([...fila]); // rompo pointer
 	};
 	
 	
@@ -110,7 +134,11 @@ function muestraSala (conConsola = false) {
 				
 				
 				if ([posY, posX].toString() == juego.posPlayer.toString()) {
+					
 					strSimbolo = "O ";
+					strSimbolo = '<span style="color: blue">O </span>'
+					pisando ();
+					
 				} else {
 					strSimbolo = diccionario(_x2);
 				};
@@ -119,6 +147,7 @@ function muestraSala (conConsola = false) {
 				if ([posY, posX].toString() == "[0,0]") {
 					strSimbolo = "X";
 				};
+				
 				
 				
 				strFila += strSimbolo; // genero la fila de símbolos con el espacio corrector añadido
@@ -156,9 +185,17 @@ function diccionario (symbol) {
 	
 	
 	let info = {
+		
 		0: ". ",		// vacío
-		2: "X "
+		
+		2: "X ",		// trampa
+		
+		4: "¬ ",		// llave
+		5: "# ",		// cofre
+		6: "[]"			// puerta
+		
 	};
+	
 	
 	// TO-DO ERRORES
 	return info[symbol]
@@ -167,8 +204,45 @@ function diccionario (symbol) {
 
 
 
+function pisando () {
+	// Comprueba qué está pisando el jugador en su posición actual
+	
+	let idSimbolo = juego.sala [juego.posPlayer[0]] [juego.posPlayer[1]];
+	
+	
+	// X
+	if (idSimbolo == 2) {
+		juego.sumaVidaPlayer(-1);
+		alert("Has perdido 1 de vida");
+	};
+	
+	if (idSimbolo == 4) {
+		tengoLlave = true;
+		setSimbolo (juego.posPlayer[0], juego.posPlayer[1], 0);
+	};
+	
+	if (idSimbolo == 6) {
+		
+		if (tengoLlave) {
+			tengoLlave = false;
+			initSala(juego.idSala + 1);
+		};
+		
+	};
+
+	
+};
+
+
+
 function getSimbolo (y, x) {
 	return juego.sala[y][x];
+};
+
+
+
+function setSimbolo (y, x, idSimbolo) {
+	juego.sala[y][x] = idSimbolo;
 };
 
 
@@ -214,7 +288,8 @@ function muevePlayer (dir) {
 	};
 	
 	
-	let posPlayer = juego.posPlayer; // [y, y]
+	
+	let posPlayer = juego.posPlayer; // [y, x]
 	posPlayer[0] = Math.max (Math.min (posPlayer[0] + cambio[0], juego.maxY), 0);
 	posPlayer[1] = Math.max (Math.min (posPlayer[1] + cambio[1], juego.maxX), 0);
 	
@@ -232,24 +307,28 @@ function pulsaTecla (e) {
 	let key = e.key;
 	
 	
-	switch (true) {
+	if (!cambiandoDeSala) {
 		
-		case ["w", "ArrowUp"].includes(key):
-			muevePlayer("arr");
-		break;
-		
-		case ["s", "ArrowDown"].includes(key):
-			muevePlayer("aba");
-		break;
-		
-		case ["a", "ArrowLeft"].includes(key):
-			muevePlayer("izq");
-		break;
-		
-		case ["d", "ArrowRight"].includes(key):
-			muevePlayer("der");
-		break;
-		
+		switch (true) {
+			
+			case ["w", "ArrowUp"].includes(key):
+				muevePlayer("arr");
+			break;
+			
+			case ["s", "ArrowDown"].includes(key):
+				muevePlayer("aba");
+			break;
+			
+			case ["a", "ArrowLeft"].includes(key):
+				muevePlayer("izq");
+			break;
+			
+			case ["d", "ArrowRight"].includes(key):
+				muevePlayer("der");
+			break;
+			
+		};
+	
 	};
 	
 	
@@ -265,12 +344,7 @@ document.addEventListener("keydown", pulsaTecla)
 
 
 // Init
-generaSala(4, 4);
-juego.sala[1][0] = 2;
+// generaSala(8, 8);
+initSala(1);
 
-console.log(juego.sala);
-
-
-juego.posPlayer = [0, 1];
-muestraSala();
 
