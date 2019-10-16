@@ -224,13 +224,27 @@ function pulsaTecla (e) {
 	
 	let key = e.key;
 	
-	if (["w", "ArrowUp"].includes(key)) {
-		muevePlayer("arr");
-	} else if (["s", "ArrowDown"].includes(key)) {
-		muevePlayer("aba");
-	}
 	
-	console.log(e);
+	switch (true) {
+		
+		case ["w", "ArrowUp"].includes(key):
+			muevePlayer("arr");
+		break;
+		
+		case ["s", "ArrowDown"].includes(key):
+			muevePlayer("aba");
+		break;
+		
+		case ["a", "ArrowLeft"].includes(key):
+			muevePlayer("izq");
+		break;
+		
+		case ["d", "ArrowRight"].includes(key):
+			muevePlayer("der");
+		break;
+		
+	};
+	
 	
 };
 
