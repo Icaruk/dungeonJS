@@ -8,7 +8,7 @@ var juego = {
 	"maxX": 0,
 	
 	"posPlayer": [], // [y, x]
-	"vidaPlayer": [5],
+	"vidaPlayer": 5,
 	
 	
 	sumaVidaPlayer: function (n) {
