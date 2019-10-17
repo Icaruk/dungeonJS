@@ -1,5 +1,5 @@
 # dungeonJS
-[Link demo] (https://icaruk.github.io/dungeonJS/)
+[Link demo](https://icaruk.github.io/dungeonJS/)
 
 # Controles
 WASD o flechas de movimiento.
