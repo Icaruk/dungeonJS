@@ -1,8 +1,5 @@
 
-function log(...str) {
-	console.log(str);
-};
-
+const cl = console.log.bind();
 
 
 const uti = {
@@ -53,10 +50,16 @@ const uti = {
 	
 	equalArr (arr1, arr2) {
 		/*
-			Devuelve si dos arrays son iguales.
+			Devuelve si dos arrays unidimensionales son iguales.
 			
 			uti.equalArr(arr1, arr2);
 		*/
+		
+		// ¿? Reemplazar por arr1.toString == arr2.toString
+		
+		if (arr1.length != arr2.length) {
+			return false;
+		};
 		
 		for (let i = 0; i < arr1.length; i++) {
 			if (arr1[i] != arr2[i]) {
@@ -69,7 +72,7 @@ const uti = {
 		
 	},
 	
-	has (arr, ele) {
+	arrHas (arr, ele) {
 		/*
 			Comprueba si el arr tiene el elemento ele.
 			
@@ -96,4 +99,6 @@ const uti = {
 	}
 	
 };
+
+
 

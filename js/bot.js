@@ -12,7 +12,7 @@ const bot = {
 		
 		while (v < 1000) {
 			
-			console.log(v);
+			// console.log(v);
 			
 			
 			await uti.delayed(500, ()=> {
@@ -32,18 +32,18 @@ const bot = {
 	},
 	
 	enMemoria(ele) {
-		return uti.has(this.memoria, ele);
+		return uti.arrHas(this.memoria, ele);
 	},
 	
 	addMemoria(ele) {
 		
-		if (uti.has(this.memoria, ele)) {
-			console.log("Error: se ha intentado añadir un elemento a la memoria que ya exisitía.");
+		if (uti.arrHas(this.memoria, ele)) {
+			// console.log("Error: se ha intentado añadir un elemento a la memoria que ya exisitía.");
 		} else {
 			this.memoria.push(ele);
-			console.log("--- Memoria: ")
-			console.log(this.memoria);
-			console.log("---")
+			// console.log("--- Memoria: ")
+			// console.log(this.memoria);
+			// console.log("---")
 		};
 		
 	},
@@ -122,17 +122,17 @@ const bot = {
 			if (bot.estaDentro (y, x)) { // está dentro de los límites
 				if (simbolosBuenos.includes(getSimbolo (y, x))) { // es un símbolo bueno
 					
-					console.log("*** Dirección: " + direcciones[idx]);
+					// console.log("*** Dirección: " + direcciones[idx]);
 					
 					if (!bot.enMemoria([y, x])) { // no está en su memoria
 						// opciones.push([offset, direcciones[idx]]);
 						opciones.push(direcciones[idx]);
-						console.log("No memoria");
+						// console.log("No memoria");
 					} else {
-						console.log("Sí memoria");
+						// console.log("Sí memoria");
 					};
 					
-					console.log("*** ");
+					// console.log("*** ");
 				};
 			};
 			
@@ -142,7 +142,7 @@ const bot = {
 		};
 		
 		
-		console.log("Opciones: " + opciones);
+		// console.log("Opciones: " + opciones);
 		this.opciones = opciones;
 		// return (opciones);
 		
@@ -154,14 +154,14 @@ const bot = {
 	
 	getPrioridad () {
 		/*
-			Devuelve un array con la prioridad de las direcciones a las que debería de ir, primero para conseguir la llave y después para la puerta.
+			Obtiene un array con la prioridad de las direcciones a las que debería de ir, primero para conseguir la llave y después para la puerta.
 			
 			bot.getPrioridad(); // devuelve algo como ["aba","der","arr","izq"]
 		*/
 		
 		// Vars
 		let coordenadasObjetivo = []; // aquí guardaré las coordenadas del lugar donde tengo que ir
-		let idSimboloParaBuscar = "4"; // en principio, busco la llave
+		let idSimboloParaBuscar = 4; // en principio, busco la llave
 		
 		if (tengoLlave) { // si ya tengo llave
 			idSimboloParaBuscar = 6; // busco la puerta
@@ -243,7 +243,7 @@ const bot = {
 		};
 		
 		
-		console.log ("Prioridad: " + prioridad);
+		// console.log ("Prioridad: " + prioridad);
 		
 		this.prioridad = prioridad;
 		// return prioridad;
@@ -277,7 +277,7 @@ const bot = {
 			return;
 		};
 		
-		console.log("Sig mov: " + siguienteMovimiento);
+		// console.log("Sig mov: " + siguienteMovimiento);
 		
 		
 		muevePlayer(siguienteMovimiento);

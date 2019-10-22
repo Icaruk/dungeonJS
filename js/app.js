@@ -83,8 +83,8 @@ function diccionario (symbol) {
 	
 	let info = {
 		
-		0: ". ",		// vacío
-		1: "▒ ",		// muro
+		0: "· ",		// vacío
+		1: "| ",		// muro
 		2: "X ",		// trampa
 		
 		4: "¬ ",		// llave
@@ -94,7 +94,6 @@ function diccionario (symbol) {
 	};
 	
 	
-	// TO-DO ERRORES
 	return info[symbol]
 	
 };
@@ -162,19 +161,32 @@ function muestraSala (conConsola = false) {
 				strSimbolo = "";
 				
 				
-				if ([posY, posX].toString() == juego.posPlayer.toString()) {
+				if ([posY, posX].toString() == juego.posPlayer.toString()) { // soy yo
 					
-					strSimbolo = "O ";
-					strSimbolo = '<span style="color: blue">O </span>'
+					strSimbolo = '<span style="color: blue">O </span>'; // me pinto azul
 					
 				} else {
-					strSimbolo = diccionario(_x2);
+					strSimbolo = diccionario(_x2); // busco su símbolo
 				};
 				
 				
 				if ([posY, posX].toString() == "[0,0]") {
-					strSimbolo = "X";
+					strSimbolo = "X ";
 				};
+				
+				
+				switch (_x2) {
+					
+					case 4:
+						strSimbolo = `<span style="color: red">${strSimbolo}</span>`;
+					break;
+					
+					case 6:
+						strSimbolo = `<span style="color: green">${strSimbolo}</span>`;
+					break;
+					
+				};
+				
 				
 				
 				strFila += strSimbolo; // genero la fila de símbolos con el espacio corrector añadido
