@@ -220,6 +220,7 @@ function pisando () {
 		// ¬ (llave)
 		case 4:
 			tengoLlave = true;
+			bot.resetMemoria(); // borro la memoria al bot
 			setSimbolo (juego.posPlayer[0], juego.posPlayer[1], 0);
 		break;
 		
@@ -335,6 +336,9 @@ function muevePlayer (dir) {
 	};
 	
 	
+	// Guardo en memoria
+	bot.addMemoria([newY, newX]);
+	
 	
 	// Compruebo qué estoy pisando
 	pisando ();
@@ -343,6 +347,7 @@ function muevePlayer (dir) {
 	// Refresco sala
 	muestraSala();
 	
+	
 };
 
 
@@ -350,6 +355,8 @@ function muevePlayer (dir) {
 function pulsaTecla (e) {
 	
 	let key = e.key;
+	
+	console.log("Tecla: " + key);
 	
 	
 	switch (true) {
@@ -370,6 +377,11 @@ function pulsaTecla (e) {
 			muevePlayer("der");
 		break;
 		
+		case [" "].includes(key): 
+			bot.miraAlrededor(); // pillo datos
+			bot.mueve(); // muevo
+		break;
+		
 	};
 	
 };
@@ -383,8 +395,11 @@ document.addEventListener("keydown", pulsaTecla)
 
 
 // Init
-initSala(1);
+generaSala(2);
+initSala(2);
 modoInfinito = true;
+
+// bot.initBot();
 
 
 

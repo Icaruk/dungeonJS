@@ -123,7 +123,7 @@ function generaSala (idSala) {
 	
 	// Dificultad
 	let columnas = Math.min (2 * idSala, 48);
-	let filas = Math.min (2 * idSala, 48);
+	let filas = Math.min (2 * idSala, 36);
 	
 	
 	// Declaro la sala
@@ -154,15 +154,24 @@ function generaSala (idSala) {
 	salas[idSala].posInicial = [0,0];
 	
 	
+	// Le meto al bot en memoria la posición inicial
+	bot.resetMemoria();
+	bot.addMemoria([0, 0]);
+	
+	
 	// Pongo elementos
 	colocaRandom (idSala, [4, 6]); // llave y puerta
 	
-	for (let i = 1; i < idSala * 2; i++) {
-		colocaRandom (idSala, [1]); // coloco muro
+	if (idSala >= 2) {
+		for (let i = 1; i < idSala; i++) {
+			colocaRandom (idSala, [1]); // coloco muro
+		};
 	};
 	
-	for (let i = 1; i < idSala; i++) {
-		colocaRandom (idSala, [2]); // coloco trampa
+	if (idSala >= 4) {
+		for (let i = 1; i < (idSala / 2); i++) {
+			colocaRandom (idSala, [2]); // coloco trampa
+		};
 	};
 	
 	
