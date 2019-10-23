@@ -2,8 +2,12 @@
 [Link demo](https://icaruk.github.io/dungeonJS/)
 
 # Controles
-WASD o flechas de movimiento.
+**WASD** o flechas de movimiento.
+Mantén **espacio** para que el bot encuentre la llave y la puerta automáticamente.
 
 # Objetivo
-Tú eres un **O** azul y tienes que conseguir la llave **¬** evitando las **X** para entrar en la puerta **[]** y avanzar hasta la siguiente sala. 
+Tú eres un **O** (azul) y tienes que conseguir la llave **¬** (roja) evitando las **X** para entrar en la puerta **[]** (verde) y avanzar hasta la siguiente sala. 
 Las salas son infinitas y se generan de forma procedural, aumentando la dificultad cada vez.
+
+# Bot
+El bot tiene un 2% de quedarse atascado.
