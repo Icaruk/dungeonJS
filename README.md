@@ -3,7 +3,7 @@
 
 # Controles
 **WASD** o flechas de movimiento.<br>
-Mantén **espacio** para que el bot encuentre la llave y la puerta automáticamente.
+Mantén **espacio** para que el bot juegue por ti.
 
 # Objetivo
 Tú eres un **O** (azul) y tienes que conseguir la llave **¬** (roja) evitando las **X** para entrar en la puerta **[]** (verde) y avanzar hasta la siguiente sala.<br>
