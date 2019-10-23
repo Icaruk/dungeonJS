@@ -182,7 +182,7 @@ function muestraSala (conConsola = false) {
 					break;
 					
 					case 6:
-						strSimbolo = `<span style="color: green">${strSimbolo}</span>`;
+						strSimbolo = `<span style="color: #7DF906">${strSimbolo}</span>`;
 					break;
 					
 				};
@@ -367,8 +367,6 @@ function muevePlayer (dir) {
 function pulsaTecla (e) {
 	
 	let key = e.key;
-	
-	console.log("Tecla: " + key);
 	
 	
 	switch (true) {
