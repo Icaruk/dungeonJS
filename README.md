@@ -13,6 +13,6 @@ Las salas son infinitas y se generan de forma procedural, aumentando la dificult
 El bot tiene un 2% de quedarse atascado.
 
 # Preview
-![](https://i.gyazo.com/33a7c2424e9d2072ee0ced72ebe77108.png)
-![](https://i.gyazo.com/c823b0ceb21f70088a9e8f2eed958f51.png)
+![](https://i.gyazo.com/33a7c2424e9d2072ee0ced72ebe77108.png)<br>
+![](https://i.gyazo.com/c823b0ceb21f70088a9e8f2eed958f51.png)<br>
 ![](https://i.gyazo.com/185d1d07de5952bd24a47b864723bac6.png)
